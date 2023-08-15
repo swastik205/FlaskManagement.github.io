@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+    <div class="container">
+      <form action="/" method="POST">
+        <div class="alert alert-primary fs-2 text-center" role="alert">
+          Log Book
+        </div>
+        <div class="mb-5 mt-5 mx-5">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" id="name">
+        </div>
+
+        <div class="mb-5 mt-5 mx-5">
+          <label for="roll" class="form-label">Roll Number</label>
+          <input type="number" class="form-control" name="roll" id="roll">
+        </div>
+
+        <div class="mb-5 mt-5 mx-5">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mx-5">Submit</button>
+      </form>
+    </div>
+
+    <div class="container" style="margin-left: 320px; margin-top: 20px">
+
+        <!--********  JINJA2 **********-->
+        <!-- Holy shit code!!! -->
+          {% if allEntries|length == 0 %}
+              <div class="alert alert-warning" role="alert">
+                No Entries found. Add entries!!
+              </div>
+          {% else %}
+            <table class="table mt-5">
+                <thead>
+                  <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Roll</th>
+                    <th scope="col">Handle</th>
+                    <th scope="col">Date & Time</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+          {% for entry in allEntries %}
+                  <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{entry.name}}</td>
+                    <td>{{entry.roll}}</td>
+                    <td>{{entry.email}}</td>
+                    <td>{{entry.date_created}}</td>
+                    <td><a href="/update/{{entry.sno}}" type="button" class="btn btn-outline-dark btn-sm">Update</a>
+                    <a href="/delete/{{entry.sno}}" type="button" class="btn btn-outline-dark btn-sm">Delete</a></td>
+                  </tr>
+
+          {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+
+{% endblock body %}
