@@ -31,7 +31,7 @@ def main():
         db.session.add(entry)
         db.session.commit()
     allEntries = Entry.query.all()            # to display in terminal
-    return render_template('hello.html', allEntries=allEntries)
+    return render_template('index.html', allEntries=allEntries)
 
 @app.route('/delete/<int:sno>')         # to specify that an integer of name sno will be passed in the route
 def delete(sno):
